@@ -11,7 +11,7 @@ var DB *sql.DB
 
 func Init() {
 	var err error
-	DB, err = sql.Open("postgres", "user=postgres password=hesham dbname=studentdb sslmode=disable")
+	DB, err = os.Getenv("DATABASE_URL")
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
