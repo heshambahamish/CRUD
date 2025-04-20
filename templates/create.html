@@ -1,0 +1,26 @@
+{{define "content"}}
+<h1 class="text-xl font-bold mb-4">Add New Student</h1>
+{{if .Error}}
+    <div class="bg-red-500 text-white p-4 mb-4 rounded">
+        <strong>Error:</strong> {{.Error}}
+    </div>
+{{end}}
+<form action="/store" method="POST" class="space-y-4">
+    <div>
+        <label>Name</label>
+        <input name="name" required class="border rounded px-2 py-1 w-full">
+    </div>
+    <div>
+        <label>Email</label>
+        <input name="email" type="email" required class="border rounded px-2 py-1 w-full">
+    </div>
+    <div>
+        <label>Age</label>
+        <input name="age" type="number" min="1" required class="border rounded px-2 py-1 w-full">
+    </div>
+    <div>
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Create</button>
+        <a href="/" class="ml-4 text-gray-600">Cancel</a>
+    </div>
+</form>
+{{end}}

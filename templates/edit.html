@@ -1,0 +1,27 @@
+{{define "content"}}
+<h1 class="text-xl font-bold mb-4">Edit Student</h1>
+{{if .Error}}
+    <div class="bg-red-500 text-white p-4 mb-4 rounded">
+        <strong>Error:</strong> {{.Error}}
+    </div>
+{{end}}
+<form action="/update" method="POST" class="space-y-4">
+    <input type="hidden" name="id" value="{{.Student.ID}}">
+    <div>
+        <label>Name</label>
+        <input name="name" value="{{.Student.Name}}" required class="border rounded px-2 py-1 w-full">
+    </div>
+    <div>
+        <label>Email</label>
+        <input name="email" type="email" value="{{.Student.Email}}" required class="border rounded px-2 py-1 w-full">
+    </div>
+    <div>
+        <label>Age</label>
+        <input name="age" type="number" min="1" value="{{.Student.Age}}" required class="border rounded px-2 py-1 w-full">
+    </div>
+    <div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+        <a href="/" class="ml-4 text-gray-600">Cancel</a>
+    </div>
+</form>
+{{end}}
