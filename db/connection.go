@@ -14,7 +14,8 @@ var DB *sql.DB
 
 func Init() {
 	var err error
-	DB, err = os.Getenv("DATABASE_URL")
+	dsn := os.Getenv("DATABASE_URL")
+        DB, err := sql.Open("postgres", dsn)
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
 	}
