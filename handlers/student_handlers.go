@@ -4,8 +4,8 @@ import (
 	"html/template"
 	"net/http"
 	"strconv"
-	"student-crud/db"
-	"student-crud/models"
+	"github.com/heshambahamish/CRUD/db"
+        "github.com/heshambahamish/CRUD/models"
 
 	"github.com/lib/pq"
 )
