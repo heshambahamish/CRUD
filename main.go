@@ -2,8 +2,8 @@ package main
 
 import (
 	"net/http"
-	"student-crud/db"
-	"student-crud/handlers"
+	"github.com/heshambahamish/CRUD/db"
+        "github.com/heshambahamish/CRUD/handlers"
 )
 
 func main() {
