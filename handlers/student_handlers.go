@@ -76,14 +76,26 @@ func Store(w http.ResponseWriter, r *http.Request) {
 }
 
 func Edit(w http.ResponseWriter, r *http.Request) {
-	id := r.URL.Query().Get("id")
-	row := db.DB.QueryRow("SELECT * FROM students WHERE id=$1", id)
-	var s models.Student
-	row.Scan(&s.ID, &s.Name, &s.Email, &s.Age)
+    id := r.URL.Query().Get("id")
+    row := db.DB.QueryRow("SELECT * FROM students WHERE id=$1", id)
+    var s models.Student
+    err := row.Scan(&s.ID, &s.Name, &s.Email, &s.Age)
+    if err != nil {
+        http.Error(w, "Student not found", http.StatusNotFound)
+        return
+    }
 
-	tmpl, _ := template.ParseFiles("templates/edit.html", "templates/layout.html")
-	tmpl.ExecuteTemplate(w, "layout", s)
+    tmpl, err := template.ParseFiles("templates/edit.html", "templates/layout.html")
+    if err != nil {
+        http.Error(w, "Template parsing error: "+err.Error(), http.StatusInternalServerError)
+        return
+    }
+
+    tmpl.ExecuteTemplate(w, "layout", map[string]interface{}{
+        "Student": s,
+    })
 }
+
 
 func Update(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
